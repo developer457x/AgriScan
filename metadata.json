@@ -1,0 +1,6 @@
+{
+  "name": "AgriScan",
+  "description": "AI-Powered Smart Farming & Crop Health Analyzer for detecting crop diseases, diagnosing plant health, providing treatment recommendations, and agricultural chat.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

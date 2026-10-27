@@ -1,0 +1,969 @@
+```plaintext
+# MASTER BUILD PROMPT: AGRISCAN — AI-POWERED SMART FARMING AND CROP HEALTH ANALYZER
+
+## 1. Your Role and Mission
+
+Act as a senior Android engineer, AI/ML engineer, agricultural technology specialist, backend developer, UI/UX designer, cybersecurity engineer, and software tester.
+
+Build a complete, production-oriented Android application named **AgriScan — Smart Crop Health Analyzer**.
+
+AgriScan is a farmer-first mobile application that uses live camera feeds, crop photographs, real AI models, and current internet information to analyze crop health, detect possible diseases and pests, explain the findings in simple language, and recommend practical, locally relevant solutions.
+
+The application must genuinely work. Do not deliver only a Figma design, landing page, static prototype, mock dashboard, collection of disconnected screens, or an app in which buttons do nothing.
+
+**Build a working Android project with real application logic, API integrations, authentication, persistent history, an accessible interface, error handling, and setup instructions.**
+
+Use the attached AgriScan showcase image as the primary visual reference. Reproduce its overall design language, screen organization, colors, visual hierarchy, green agricultural theme, rounded cards, bottom navigation, camera interface, analysis results, AI chat, history, and settings. Improve its usability and implementation wherever necessary.
+
+When requirements conflict, prioritize safety, factual accuracy, user privacy, functional completeness, and ease of use.
+
+---
+
+## 2. Technology Stack and Architecture
+
+Use a maintainable, modern native Android architecture.
+
+### Android application
+
+- Language: Kotlin.
+- Interface: Jetpack Compose and Material 3.
+- Architecture: MVVM with clear separation between presentation, domain, and data layers.
+- Dependency injection: Hilt or another maintainable, compatible solution.
+- Camera: AndroidX CameraX for live camera preview, image capture, and image analysis.
+- Networking: Retrofit/OkHttp or an equivalent reliable HTTP client with serialization and structured error handling.
+- Local storage: Room for local scan records, drafts, and offline-accessible information.
+- Background synchronization and reminders: WorkManager.
+- Secure local storage: Android Keystore-backed encryption for sensitive local information where appropriate.
+- Authentication: Firebase Authentication, Google Credential Manager, and verified email/password authentication.
+- Cloud database: Cloud Firestore, with per-user security rules and offline persistence.
+- Image storage: Firebase Storage or another properly secured object-storage solution.
+- Backend: Firebase Cloud Functions or Cloud Run, or an equivalent authenticated backend.
+- AI: A genuinely accessible multimodal AI API that accepts images and text.
+- Internet research: A supported web-search grounding API or a real search-and-retrieval backend that returns verifiable source URLs.
+- Maps, weather, notifications, and agricultural data: Add reliable provider integrations when available and relevant.
+
+Use current, stable, officially supported SDKs and APIs when implementing. Check the selected providers' current documentation, model availability, API limits, pricing, licensing, and platform requirements before integrating them.
+
+Do not invent API endpoints, model capabilities, SDK methods, or provider functionality.
+
+Keep interfaces between the app, backend, AI providers, and data sources modular so that a provider can be replaced without rewriting the entire application.
+
+### Required architecture
+
+Separate the project into clear modules or packages, including:
+
+1. Authentication and user profiles.
+2. Camera and external camera management.
+3. Image capture, preprocessing, and upload.
+4. Crop identification and AI diagnosis.
+5. Health scoring and issue localization.
+6. Agricultural knowledge retrieval and web citations.
+7. AI chat and conversation memory.
+8. Treatment and prevention recommendations.
+9. Farm management and crop monitoring.
+10. Scan history and reports.
+11. Notifications and reminders.
+12. Settings, accessibility, localization, and privacy.
+13. Backend clients, persistence, and synchronization.
+14. Logging, error handling, testing, and configuration.
+
+---
+
+## 3. Design and Branding
+
+Create a professional application called **AgriScan** with the tagline:
+
+**Healthy Crops. Better Yields. A Brighter Future.**
+
+The visual experience should closely follow the supplied reference image.
+
+### Design system
+
+Use:
+
+- Deep forest green for primary branding.
+- Fresh agricultural green for important actions and positive indicators.
+- White and very light mint backgrounds for content.
+- Subtle green borders and shadows.
+- Rounded rectangular cards.
+- Clear, readable typography.
+- Simple icons accompanied by text.
+- Large touch targets and generous spacing.
+- Consistent navigation and button styling.
+- Photographs of real crops where imagery adds useful context.
+
+Suggested starting palette:
+
+- Primary: `#087A4B`
+- Deep green: `#064C38`
+- Fresh green: `#26A65B`
+- Pale mint: `#EAF8F1`
+- White: `#FFFFFF`
+- Main text: `#18352A`
+- Warning: `#E9A522`
+- Critical issue: `#D94848`
+
+Use the design tokens consistently, while preserving accessibility and sufficient contrast.
+
+Use photographs from the actual scan or trustworthy agricultural image sources rather than unrelated decorative stock photos.
+
+### UI quality requirements
+
+The application must adapt to different Android screen sizes, screen densities, font scales, and system navigation modes.
+
+Support light and dark themes, readable text at larger font sizes, screen-reader descriptions, accessible touch targets, loading skeletons, empty states, offline indicators, and understandable error messages.
+
+Do not overload farmers with technical terminology, tiny text, complicated charts, or excessive menus.
+
+Make the most important actions immediately accessible: **Scan Crop, Upload Photo, Ask AI, and View History.**
+
+---
+
+## 4. Required Screens and Navigation
+
+Implement all of the following screens with actual navigation and functional controls.
+
+### A. Splash and Welcome Screen
+
+Follow the reference image.
+
+Display the AgriScan logo, agricultural background imagery, app name, tagline, and a prominent Get Started button.
+
+Provide entry points for Google sign-in and existing-account sign-in.
+
+Use an appropriate splash duration and avoid unnecessarily delaying the app launch.
+
+### B. Sign In and Registration
+
+Provide a clean authentication screen with:
+
+- Sign In and Register tabs.
+- Email address or phone number only when the corresponding authentication flow is actually supported.
+- Password input with visibility toggle.
+- Remembered session using the authentication provider's secure session handling.
+- Forgot Password.
+- Google sign-in.
+- Email/password registration.
+- Email verification.
+- Password reset.
+- Authentication loading and error states.
+- Clear terms of service and privacy policy links.
+- Account deletion and sign-out options.
+
+For the first version, implement Google authentication using the supported Android Credential Manager and Firebase Authentication flow.
+
+For manual registration, use Firebase email/password authentication. If phone-based authentication is included, implement actual phone verification with the appropriate provider configuration rather than merely accepting a phone number as an account identifier.
+
+Handle duplicate accounts, invalid credentials, network interruptions, cancelled Google sign-in, unverified email, and password-reset failures.
+
+Never store plain-text passwords.
+
+### C. Home Dashboard
+
+Reproduce the visual structure of the reference dashboard.
+
+Display a personalized greeting and a prominent agricultural banner.
+
+The dashboard should contain:
+
+- Scan Crop.
+- Upload Image.
+- Chat with AgriScan AI.
+- Scan History.
+- My Farms and My Crops.
+- Recent scans.
+- Crop health overview.
+- Important disease or pest alerts, when supported by credible evidence.
+- Relevant seasonal recommendations.
+- Quick farming tips.
+- Weather information, when a real weather provider is configured.
+- A prominent offline or synchronization status when applicable.
+
+Personalize the interface using the farmer's selected crops, region, language, and farm information.
+
+Never populate the dashboard with fabricated weather, scan history, or disease alerts.
+
+### D. Camera Scanning Screen
+
+This is one of the application's most important screens.
+
+Create a full-screen camera interface similar to the reference image, with a live preview, green scanning frame, Camera/Gallery selector, flash control where supported, capture button, image-import action, and clear analysis instructions.
+
+The camera screen must support:
+
+- Live smartphone camera preview.
+- Rear and front camera selection when appropriate.
+- Image capture.
+- Flash/torch control when available.
+- Focus and exposure adjustment where supported.
+- Zoom and macro-friendly close-up capture where supported.
+- Gallery image selection.
+- Multiple photos for a single inspection.
+- Retake and image-review actions.
+- Capture guidance for poor lighting, blur, excessive distance, and obstructed plant parts.
+- Optional live detection overlays when the selected vision model actually supports reliable localization.
+
+Allow the user to identify a crop manually or ask the system to identify it.
+
+Collect an optional crop, variety, plant age, growth stage, planting date, region, irrigation method, and affected plant parts.
+
+Support a quick scan that needs minimal input, as well as a more detailed inspection for improved accuracy.
+
+#### Real-time camera analysis
+
+Implement CameraX image analysis with appropriate image-processing, frame-throttling, and backpressure handling.
+
+Do not upload every camera frame to a cloud AI service. Analyze selectively, process efficiently, and let users choose when cloud image analysis is used.
+
+Provide an on-device processing path where suitable models are genuinely available.
+
+For real-time overlays, use actual detection or segmentation model output. Do not display decorative boxes or invented detections.
+
+#### External camera support
+
+Design a camera abstraction layer so the application can support compatible external cameras.
+
+Implement and document support for:
+
+- Supported USB/UVC cameras through Android USB-host functionality where the device and camera permit it.
+- Compatible network/IP cameras through an explicitly implemented and tested streaming protocol, such as RTSP, where practical.
+- Smartphone cameras through CameraX.
+
+For external cameras, provide connection status, device selection, permission handling, supported resolution information, reconnection, and clear troubleshooting.
+
+Do not claim universal external-camera compatibility. Clearly explain hardware, Android, transport-protocol, and network limitations. Do not expose an insecure network camera directly to the internet.
+
+### E. Crop Analysis Results
+
+Create a visually rich analysis screen matching the reference image.
+
+Display:
+
+1. A captured crop photograph.
+2. Annotated areas of concern, if the AI produces valid localization results.
+3. Overall crop health.
+4. Confidence and uncertainty information.
+5. Healthy, potentially diseased, and pest-affected areas.
+6. Detected symptoms or possible conditions.
+7. A prioritized list of issues.
+8. Recommended next actions.
+9. Links to detailed diagnosis and supporting sources.
+10. Save, share, and rescan actions.
+
+Use an easy-to-understand health score from 0–100 only when the system has a defined, documented method to calculate it.
+
+Explain the factors contributing to that score. Do not present a subjective model-generated number as a scientifically calibrated measurement.
+
+Distinguish between:
+
+- Observed visual symptoms.
+- Possible causes.
+- The most likely diagnosis.
+- Alternative diagnoses.
+- Confirmed information, if genuinely confirmed through a qualified diagnostic workflow.
+
+A single image cannot establish every aspect of a crop's health. Explain when a wider field survey, leaf close-up, root inspection, soil test, laboratory analysis, or local agricultural expert is needed.
+
+### F. Detailed Diagnosis
+
+For every detected or suspected problem, present a useful diagnosis page.
+
+Include, whenever the information is available:
+
+- Common name.
+- Scientific name.
+- Problem category: fungal, bacterial, viral, insect, mite, nematode, nutrient deficiency, environmental stress, or other relevant category.
+- Affected crop and crop variety.
+- Affected plant part.
+- Visible symptoms.
+- Likely causes.
+- Conditions that favor the problem.
+- Similar-looking conditions.
+- Severity assessment and its basis.
+- Diagnostic confidence.
+- Source-backed treatment options.
+- Prevention strategies.
+- Recommended monitoring period.
+- When to consult a local expert.
+
+Support detailed inspections of leaves, stems, roots, fruits, flowers, and whole-plant appearance wherever suitable images and models are available.
+
+Do not label all brown spots as a disease or all visible insects as harmful pests.
+
+### G. Real-Time Agricultural Information
+
+For every significant diagnosis or recommendation, retrieve relevant information from real web sources or a configured agricultural knowledge database.
+
+The AI must not rely solely on information already remembered by the language model when the answer depends on current pesticide registrations, local advisories, product availability, weather, prices, or recent agricultural guidance.
+
+Prioritize sources in this order where applicable:
+
+1. National and state agricultural departments.
+2. ICAR institutes and relevant agricultural research organizations in India.
+3. Krishi Vigyan Kendras and agricultural universities.
+4. Government-approved pesticide and plant-protection information.
+5. FAO and other reputable international agricultural organizations.
+6. Peer-reviewed research and credible agricultural extension resources.
+7. Reputable manufacturers and retailers for product-label and purchasing information.
+
+Use sources relevant to the user's actual country, state, region, crop, and growing conditions.
+
+For every retrieved result, store and display:
+
+- Source or organization name.
+- Page or document title.
+- Original URL.
+- Publication or update date, when available.
+- Retrieval date.
+- Relevant supporting text or a concise summary.
+- Which recommendation or claim the source supports.
+
+Provide tappable references such as **View Official Guidance**, **Open Research**, or **View Product Label**.
+
+Do not fabricate citations, source titles, research findings, regulatory approvals, product links, availability, prices, or publication dates.
+
+If no credible source can be found, say that reliable information was unavailable. Do not invent an authoritative-looking answer.
+
+Implement retries, timeouts, source deduplication, caching with freshness limits, and graceful handling of unavailable sources.
+
+### H. Practical Fixes and Treatment Recommendations
+
+The app must translate diagnosis results into safe, practical action plans.
+
+For each suspected problem, provide:
+
+**Immediate actions:** What the farmer can inspect or do now.
+
+**Nonchemical control:** Sanitation, removal of affected material where appropriate, improved airflow, water-management changes, crop rotation, traps, physical control, or biological options where evidence supports them.
+
+**Chemical control:** Appropriate registered products only when credible, current, location-specific sources establish suitability for the crop and target problem.
+
+**Prevention:** Steps to lower the chance of recurrence.
+
+**Monitoring:** What to observe and when to reassess.
+
+**Escalation:** When to contact a local agricultural extension service, KVK, or qualified plant-health expert.
+
+Prioritize integrated pest management rather than automatically recommending chemical spraying.
+
+For pesticides and other agricultural chemicals:
+
+- Verify that the use is permitted in the relevant jurisdiction.
+- Confirm the crop and target pest or disease match the product label.
+- Retrieve directions only from reliable, applicable product-label or official sources.
+- Explain protective equipment, environmental precautions, pollinator risks, relevant re-entry intervals, and pre-harvest intervals when applicable and supported.
+- Never invent dosages, mixing ratios, application schedules, or product approvals.
+- Never suggest mixing incompatible chemicals or exceeding label directions.
+- Recommend professional advice when treatment suitability remains uncertain.
+
+Treat product recommendations as evidence-based suggestions, not guarantees of success.
+
+### I. AI Chat Interface
+
+Reproduce the chat interface shown in the reference image.
+
+Create a conversational agricultural assistant that farmers can use to ask questions about crop health, pests, diseases, soil, irrigation, fertilizer, crop management, and previously saved scans.
+
+The chat interface must include:
+
+- Persistent conversation history.
+- A text input field.
+- A working Send button.
+- Image attachments.
+- The ability to ask about the current scan.
+- Follow-up questions.
+- Suggested questions.
+- Source citations and clickable links.
+- Loading, cancellation, failure, and retry states.
+- Copy and share answer options.
+- Conversation renaming and deletion.
+- Voice input and spoken responses where supported.
+- Language-aware responses.
+- Context from the farmer's selected farm, crop, and recent scan when authorized.
+
+The assistant should use actual AI inference through a configured model API. Its responses should be grounded in current online evidence whenever factual freshness matters.
+
+Use the current scan image and structured diagnosis results when answering questions about that scan.
+
+Keep each conversation's context isolated to the correct user. Allow users to start a fresh conversation and clear contextual memory.
+
+Do not imply that the AI is a human agronomist or that its findings are guaranteed.
+
+### J. AI and API Integration
+
+Implement genuine AI services rather than hardcoded answers.
+
+Use a real, supported multimodal model for crop photographs, visual reasoning, explanations, and agricultural conversations.
+
+A suitable initial approach is an image-capable model API with web-search grounding, or an equivalent combination of a vision model and a properly implemented search backend.
+
+The architecture must support separate, replaceable interfaces for:
+
+- Image understanding.
+- Crop and disease classification.
+- Object detection or segmentation, when supported.
+- Agricultural question answering.
+- Web research and evidence retrieval.
+- Recommendation generation.
+- Translation and speech services, if enabled.
+
+Use specialized plant-disease models or validated agricultural datasets where suitable and legally available. Do not assume that a general-purpose visual AI has clinically or scientifically validated diagnostic accuracy.
+
+Do not pretend that a general image-labeling model is a crop-disease detector.
+
+If a suitable dedicated model is unavailable, clearly label the result as an AI-assisted preliminary assessment and expose its limitations.
+
+Use API calls for real inference. Cache suitable results where safe and appropriate, and avoid expensive repeated requests for unchanged images.
+
+#### Backend API design
+
+Implement documented, authenticated backend endpoints, for example:
+
+- `POST /api/v1/crop/identify`
+- `POST /api/v1/crop/analyze`
+- `POST /api/v1/crop/analyze-multiple`
+- `POST /api/v1/agriculture/search`
+- `POST /api/v1/chat`
+- `GET /api/v1/scans`
+- `GET /api/v1/scans/{scanId}`
+- `DELETE /api/v1/scans/{scanId}`
+- `POST /api/v1/reports/export`
+
+Adapt these endpoints to the selected backend rather than creating unused or disconnected routes.
+
+Define request schemas, response schemas, authentication requirements, error codes, timeouts, rate limits, and validation rules.
+
+Return structured diagnosis information alongside explanatory text, evidence, confidence, and recommended actions.
+
+#### API security
+
+Never hardcode private AI API keys, search API keys, retailer credentials, or service-account secrets inside the Android source code or APK.
+
+Keep private provider credentials on a secured backend and use a managed secret store.
+
+Authenticate and authorize every protected request. Validate uploaded files and content types. Restrict upload sizes, apply appropriate request quotas, prevent unauthorized access to scans, and protect against abuse and excessive AI spending.
+
+Use least-privilege service permissions, HTTPS, appropriate logging redaction, and per-user database/storage access rules.
+
+A mobile app's public Firebase configuration is not a substitute for backend authorization or security rules.
+
+### K. Google Authentication and Manual Accounts
+
+Implement real authentication using the configured authentication provider.
+
+Google account flow:
+
+1. The user selects Continue with Google.
+2. Android's supported credential interface opens.
+3. The user selects or authenticates with a Google account.
+4. The identity token is validated through the correct authentication flow.
+5. A corresponding AgriScan user profile is created or loaded.
+6. The user reaches the dashboard.
+
+Email account flow:
+
+1. Registration validates the email and password.
+2. A real account is created.
+3. The app sends an email verification message.
+4. The user verifies their address.
+5. Sign-in establishes the authenticated session.
+6. Password reset and account recovery work correctly.
+
+Prevent duplicate profiles where accounts are legitimately linked. Handle credential cancellation and identity-provider errors.
+
+Provide settings for profile editing, authentication method, account security, sign-out, and account deletion.
+
+Do not store Google access tokens or passwords unnecessarily, and do not log credentials or authentication secrets.
+
+### L. Complete Scan History
+
+Implement a fully functional history page following the reference image.
+
+Each scan record should preserve, where available:
+
+- Scan ID.
+- Capture date and time.
+- Crop and variety.
+- Farm identifier.
+- Original image or authorized image reference.
+- Diagnosis results.
+- Health score and scoring explanation.
+- Identified symptoms and suspected issues.
+- Confidence and uncertainty.
+- Treatment recommendations.
+- Evidence sources.
+- Model/provider and relevant version metadata.
+- User notes.
+- Follow-up observations.
+- Scan and synchronization status.
+
+Provide search, filters, sorting, crop-specific grouping, and scan comparison.
+
+Useful filters include All, Healthy, Disease Suspected, Pest Suspected, and Follow-up Needed.
+
+Let farmers open previous scans, edit notes, record whether a treatment helped, add new photographs, compare crop progression, and export reports.
+
+History must persist across app restarts and logins.
+
+Save records locally and synchronize them to the authenticated user's cloud account when connectivity returns. Handle duplicate synchronization and conflicts safely.
+
+Support deletion of a scan and, where appropriate, its stored images.
+
+Never show one user's records to another user.
+
+### M. Farm and Crop Management
+
+Add a My Farm section that allows users to register one or multiple farms and fields.
+
+Store optional farm details such as:
+
+- Farm name.
+- Approximate location or manually selected region.
+- Field name or identifier.
+- Crop, variety, and planting date.
+- Approximate field size and unit.
+- Soil type, when known.
+- Irrigation method.
+- Growth stage.
+- Notes and crop-management history.
+
+Support multiple simultaneous crops.
+
+Do not require precise GPS access. Offer manual location selection and request location permission only when the user enables a feature that needs it.
+
+Use crop and regional context to improve searches, recommendations, and comparisons.
+
+### N. Personalized Recommendations and Notifications
+
+Build a recommendations area for practical crop care.
+
+When supported by actual data, provide reminders for:
+
+- Rechecking suspected disease or pest symptoms.
+- Monitoring after treatment.
+- Irrigation checks.
+- Relevant crop-calendar activities.
+- Crop-specific seasonal advisories.
+- Weather-related risks.
+- Saved tasks and farmer-entered schedules.
+
+Use actual weather or advisory APIs for external conditions.
+
+Provide clear source and freshness information. Do not issue disease outbreak alerts solely because a language model generated a plausible warning.
+
+Implement Android notifications with user consent, quiet hours, and configurable preferences.
+
+Never suggest that the app can predict a harvest or prevent a crop loss with certainty.
+
+### O. Real Agricultural Products and Resources
+
+The relevant-information screen should be similar to the reference image.
+
+Display useful resources and, where appropriate, products associated with a verified problem or recommendation.
+
+For real products, retrieve information from actual, currently available sources and show the relevant details:
+
+- Product name.
+- Manufacturer or brand.
+- Category and intended use.
+- Active ingredient when reliably documented and relevant.
+- Suitability for the crop and target problem.
+- Source-backed instructions and safety information.
+- Current price and availability only when actually retrieved.
+- Seller or source name.
+- Product image from an authorized source.
+- Direct product or official-label link.
+- Date the information was retrieved.
+
+Clearly separate official agricultural guidance from commercial advertisements or retailer listings.
+
+Never invent product cards, prices, stock status, efficacy claims, ratings, affiliate links, or purchase links.
+
+Do not promote a product solely because it is available for sale. Verify its relevance and regulatory suitability first.
+
+Where useful, show lower-risk and nonchemical alternatives alongside appropriate registered treatments.
+
+---
+
+## 5. Interface and Navigation Details
+
+Use a consistent bottom navigation bar inspired by the reference image:
+
+- Home.
+- History.
+- Chat.
+- More.
+
+The More section can contain Farms, Recommendations, Saved Resources, Notifications, and Settings.
+
+The app should also include the following important screens:
+
+1. Splash and welcome.
+2. Sign-in and registration.
+3. Home dashboard.
+4. Live camera.
+5. Gallery picker and image review.
+6. Crop identification.
+7. Analysis progress.
+8. Crop health results.
+9. Detailed diagnosis.
+10. Treatment plan.
+11. Agricultural web research.
+12. Product and official-resource details.
+13. AI chat.
+14. Conversation history.
+15. Scan history.
+16. Individual scan report.
+17. Crop comparison.
+18. Farm and field management.
+19. Reminders and notifications.
+20. User profile.
+21. Language and accessibility settings.
+22. Privacy and permissions.
+23. Help, feedback, and support.
+24. Offline and synchronization status.
+
+Use a logical navigation graph, proper Android back behavior, loading indicators, confirmation dialogs for destructive operations, and meaningful empty states.
+
+Every prominent button must perform the action its label promises.
+
+---
+
+## 6. Localization and Farmer Accessibility
+
+Design AgriScan initially for Indian farmers while keeping the system adaptable to other countries.
+
+Provide an extensible localization architecture, with an initial language set such as:
+
+- English.
+- Hindi.
+- Kannada.
+- Telugu.
+- Tamil.
+- Marathi.
+- Bengali.
+- Other Indian languages as translations become available.
+
+Do not pretend a language is fully supported if its translations have not been implemented.
+
+Let the farmer select a preferred language and optionally use a different language for AI responses.
+
+Use simple vocabulary, short explanations, visual examples, clear measurements, familiar units, and step-by-step instructions.
+
+Support speech-to-text and text-to-speech through real services or Android capabilities where appropriate. Make language and microphone permissions explicit.
+
+Provide simple onboarding, a low-friction quick scan, tooltips, and a guided first analysis.
+
+The application should remain useful for farmers who are not experienced smartphone users.
+
+---
+
+## 7. Offline Functionality and Low Connectivity
+
+Assume that some users have slow, unreliable, or expensive mobile internet.
+
+Implement:
+
+- Locally saved scan history.
+- Cached previous reports and agricultural guidance.
+- Offline access to saved recommendations.
+- Draft scan records.
+- Deferred uploads and synchronization.
+- Retry controls for failed requests.
+- Compressed image uploads with appropriate quality preservation.
+- Network-status indicators.
+- Configurable image-upload quality.
+- Clear identification of unavailable online features.
+
+Where a validated, compatible on-device model is available, allow supported local analysis.
+
+When no suitable offline AI model exists, explain that a full AI diagnosis needs an internet connection. Never fabricate a diagnosis or pretend an unsuccessful request succeeded.
+
+Clearly label cached information and show when it was retrieved. Warn users when previously retrieved treatment or regulatory information may be outdated.
+
+Use local notifications and reminders for tasks that do not need continuous internet access.
+
+---
+
+## 8. Data Models and Persistent Storage
+
+Implement versioned, maintainable data models for at least:
+
+**UserProfile:** user ID, display name, email, language, region, preferences, and timestamps.
+
+**Farm:** farm ID, owner ID, name, approximate location, and optional farm details.
+
+**Field:** field ID, farm ID, crop, variety, planting date, and management details.
+
+**Scan:** scan ID, owner ID, farm/field references, image references, timestamps, diagnosis status, and scoring details.
+
+**Diagnosis:** diagnosis ID, crop, suspected condition, symptoms, probability or confidence where supported, severity assessment, alternative explanations, and recommendations.
+
+**EvidenceSource:** source ID, title, organization, URL, publication date, retrieval date, relevant claims, and freshness status.
+
+**TreatmentPlan:** plan ID, target issue, action, source-backed instructions, safety precautions, and follow-up schedule.
+
+**ChatConversation:** conversation ID, owner ID, title, context references, and timestamps.
+
+**ChatMessage:** message ID, conversation ID, role, content, attachment references, citations, and timestamps.
+
+**Reminder:** reminder ID, owner ID, task, due time, and notification preferences.
+
+**FarmObservation:** observation ID, scan or field reference, date, notes, images, and observed progress.
+
+Use server-side security rules that enforce ownership and prevent cross-account access. Validate data both on the client and on the backend.
+
+Define explicit data-retention and deletion behavior. Implement a retention policy for uploaded images, generated reports, cached data, and logs.
+
+---
+
+## 9. AI Diagnosis Quality and Safety
+
+Crop disease identification is an evidence-based agricultural task, not just an image-description exercise.
+
+Design the analysis pipeline as follows:
+
+1. Validate the captured image and its quality.
+2. Identify the crop where possible, or ask the farmer.
+3. Detect relevant visible symptoms or objects using appropriate models.
+4. Retrieve agricultural information relevant to the crop and region.
+5. Generate a preliminary differential diagnosis.
+6. Compare the visual evidence against reliable sources.
+7. Check whether the recommended actions match the crop, likely problem, location, and growth stage.
+8. Return a structured report with supporting evidence.
+9. Explain uncertainty and request additional information when necessary.
+10. Save the results and allow follow-up observations.
+
+A model's confidence score must not be presented as calibrated probability unless the underlying model and scoring method justify that interpretation.
+
+Do not invent a precise affected-area percentage, disease severity, expected yield loss, or recovery probability when it cannot be reliably estimated from the available evidence.
+
+When results are ambiguous, show the leading possibilities and explain what extra observation would help distinguish them.
+
+Never guarantee that a treatment will cure a disease or that a crop is safe to consume.
+
+Keep advice conservative where a wrong diagnosis could cause significant crop damage, financial loss, chemical exposure, or food-safety issues. Recommend a qualified local expert when the evidence is insufficient.
+
+---
+
+## 10. Privacy, Security, and User Trust
+
+Build privacy and security into the application from the beginning.
+
+- Request camera, microphone, file, notification, and location permissions only when needed.
+- Explain why a permission is needed.
+- Do not upload images without appropriate user awareness and consent.
+- Avoid retaining unnecessary image metadata or precise location.
+- Strip location metadata from shared images unless the user explicitly chooses otherwise.
+- Enforce authenticated backend access and per-user storage rules.
+- Protect API credentials and administrative secrets.
+- Validate image sizes, formats, and backend requests.
+- Apply rate limits and abuse protection.
+- Avoid including sensitive user data in application logs.
+- Provide account deletion, scan deletion, and data-export options.
+- Describe what is sent to AI providers and what is stored.
+- Do not sell or expose farm information as part of app functionality.
+- Record errors and operational metrics without collecting unnecessary personal information.
+
+Implement appropriate consent and disclosure for third-party APIs, cloud storage, and AI inference.
+
+Make security configuration part of the release checklist rather than an optional future improvement.
+
+---
+
+## 11. Performance and Reliability
+
+The application should launch quickly, scroll smoothly, and avoid blocking the main thread.
+
+Implement:
+
+- Lifecycle-aware camera resources.
+- Background image processing and network operations.
+- Image resizing and compression appropriate to the model.
+- Request timeouts and safe retries.
+- Cancellation of obsolete analysis requests.
+- Upload progress.
+- Pagination for large scan histories.
+- Response caching where appropriate.
+- Duplicate-request prevention.
+- Structured error states.
+- Backoff for temporary API failures.
+- Memory-safe image loading.
+- Appropriate cleanup of temporary files.
+- Database migrations.
+- Safe offline synchronization.
+- Crash handling and meaningful diagnostics.
+
+Do not run expensive AI inference continuously without a clear user benefit. Let users control whether to analyze on demand or use supported live-analysis features.
+
+Keep API usage, storage usage, and external service costs observable. Add configurable quotas or limits to prevent accidental excessive spending.
+
+Do not claim to provide unlimited or free AI usage unless the selected service's actual terms guarantee it.
+
+---
+
+## 12. Admin and Operational Considerations
+
+Where a backend dashboard is useful, provide a separate, access-controlled administrative mechanism for managing operational configuration, approved agricultural resources, and service health.
+
+Do not create an unrestricted public admin interface or put administrator credentials in the mobile application.
+
+Support configuration for:
+
+- AI provider and model.
+- Search provider.
+- API timeouts and quotas.
+- Upload limits.
+- Feature flags.
+- Supported languages.
+- Regional agricultural sources.
+- Privacy and retention policy.
+- Service health checks.
+
+The app should show a friendly message when a provider is unavailable and offer retry or offline alternatives where possible.
+
+Do not expose provider secrets, sensitive logs, or other users' data through diagnostics.
+
+---
+
+## 13. Testing Requirements
+
+Create real automated tests, not just a list of suggested tests.
+
+Include:
+
+- Unit tests for repositories, diagnosis processing, scoring logic, validation, and synchronization.
+- UI tests for sign-in, navigation, camera permissions, scan workflows, and history.
+- API integration tests.
+- Backend authorization and data-isolation tests.
+- Error-handling tests.
+- Offline and reconnection tests.
+- Image-upload validation tests.
+- Tests for missing or invalid API credentials.
+- Tests for incomplete and unverified diagnoses.
+- Tests for account deletion and scan deletion.
+- Accessibility and responsive-layout checks where practical.
+
+Use representative crop images with suitable usage rights for tests. Evaluate the system against known examples and document where its results fail or remain uncertain.
+
+Do not claim diagnostic accuracy, test coverage, regulatory compliance, or production readiness without actual evidence.
+
+### Mandatory end-to-end acceptance tests
+
+The following workflows must work:
+
+**Test 1 — Registration:** A new user creates an account, verifies their email, signs in, and reaches the dashboard.
+
+**Test 2 — Google authentication:** A user signs in with Google using real configured credentials.
+
+**Test 3 — Crop scan:** A user opens the camera, captures a plant image, submits an analysis request, sees the real API result, and saves the scan.
+
+**Test 4 — Image diagnosis:** A user uploads a crop photograph and receives an explanation of visible symptoms, plausible causes, uncertainty, evidence, and suitable next actions.
+
+**Test 5 — Web research:** A user opens a diagnosis resource and visits a genuine source URL. Citations correspond to the information shown.
+
+**Test 6 — Agricultural chat:** A user asks a follow-up question about a saved scan, receives an answer from the configured AI provider, and can revisit the conversation.
+
+**Test 7 — History:** A saved scan remains visible after restarting the app and signing in again.
+
+**Test 8 — Offline:** A user can open saved information offline, see connectivity status, and synchronize pending changes when connectivity returns.
+
+**Test 9 — Security:** A user cannot access another user's scans or images by changing an identifier.
+
+**Test 10 — Error handling:** Missing API configuration, invalid credentials, network failures, and unavailable services produce meaningful errors instead of fabricated results.
+
+**Test 11 — Camera failure:** The app handles denied permissions, unavailable hardware, and incompatible external cameras without crashing.
+
+**Test 12 — Deletion:** Users can delete selected scan data and request account deletion with the expected storage and authentication cleanup.
+
+---
+
+## 14. Required Deliverables
+
+Deliver the following:
+
+1. A complete Android Studio project.
+2. Readable Kotlin source code.
+3. Jetpack Compose UI implementations for all required screens.
+4. A working navigation system.
+5. A configured authentication implementation.
+6. A real AI integration.
+7. A real web-retrieval or search-grounding integration with citations.
+8. Backend source code and deployment configuration.
+9. Database schemas and security rules.
+10. Image-storage implementation and access controls.
+11. Local database and offline synchronization.
+12. API contracts and sample request/response schemas.
+13. Automated tests.
+14. A `.env.example` or equivalent configuration template containing placeholder values only.
+15. A clear README with setup and troubleshooting instructions.
+16. Android permissions and build configuration.
+17. Build and installation instructions.
+18. A list of required external accounts, API keys, costs, quotas, and configuration steps.
+19. A security and privacy checklist.
+20. A list of implemented features, limitations, and any unfinished integrations.
+
+Generate an installable debug APK if the build environment supports it. If signing or deployment credentials are unavailable, document the required steps rather than pretending the application has been published.
+
+Provide exact setup steps for Firebase, Google authentication, AI APIs, search grounding, backend deployment, database rules, and image storage.
+
+Never expose private credentials in the delivered project.
+
+---
+
+## 15. Build Process and Execution Instructions
+
+Follow this order:
+
+**Phase 1 — Inspect and plan**
+
+Inspect the available workspace and determine which files, development tools, and credentials are already present. Reuse working infrastructure where appropriate. Identify missing services and produce a concise technical architecture.
+
+**Phase 2 — Establish the project**
+
+Create the Android project, configure dependencies, define models, establish navigation, and implement the shared design system.
+
+**Phase 3 — Build the UI**
+
+Reproduce the supplied AgriScan reference across the welcome, authentication, dashboard, camera, analysis, diagnosis, chat, web research, history, and settings screens.
+
+**Phase 4 — Implement real services**
+
+Integrate authentication, persistent data storage, secure image uploads, AI inference, grounded web retrieval, citations, and backend authorization.
+
+**Phase 5 — Complete the user workflows**
+
+Connect every screen and action. Implement scan saving, chat history, farm profiles, recommendations, reminders, offline support, and error handling.
+
+**Phase 6 — Verify the application**
+
+Run available builds and automated tests. Fix compilation failures, dependency issues, broken navigation, crashes, insecure rules, and incomplete workflows. Test actual API calls when credentials are available.
+
+**Phase 7 — Deliver**
+
+Provide the project files, build results, installation instructions, configuration guide, and a clear list of anything that could not be completed.
+
+Do not stop after producing a design or architecture proposal. Continue implementing the application in the available development environment.
+
+If a required external account, API key, physical device, or permission is missing, implement the appropriate integration and configuration interface, identify the exact blocker, and explain the steps needed to finish setup.
+
+Never falsely report a successful API call, passing test, deployed backend, working camera, or completed feature.
+
+If a feature cannot be implemented or verified, disclose the limitation clearly. Use a deliberately labeled demo mode only when necessary, and keep it separate from real production functionality.
+
+**Prioritize a functional, secure, visually consistent application over unnecessary complexity.**
+
+---
+
+## 16. Final Product Standard
+
+The finished AgriScan application should feel like a real agricultural assistant in a farmer's pocket—not a generic chatbot with a green theme.
+
+A farmer should be able to open the app, photograph an unhealthy plant, receive a transparent AI-assisted assessment, understand the likely problem, find reliable agricultural guidance, review safe and locally relevant action options, ask follow-up questions, and track the crop over time.
+
+The application must combine real computer vision, multimodal AI, current agricultural information, secure user accounts, persistent records, thoughtful design, and practical farming workflows.
+
+**Reference image:** Use the supplied AgriScan Farmer App Showcase image as the primary visual guide throughout implementation. Match its overall screen composition and aesthetic while improving clarity, accessibility, functionality, and reliability.
+
+**Final instruction:** Build the actual application. Do not deliver only a mockup, a generic explanation, or a list of future development ideas. Make every implemented feature work, verify it where possible, and document every external setup requirement honestly.
+```

@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">AgriScan</string>
+    <string name="app_tagline">Healthy Crops. Better Yields. A Brighter Future.</string>
+    <string name="nav_home">Home</string>
+    <string name="nav_history">History</string>
+    <string name="nav_chat">Ask AI</string>
+    <string name="nav_farms">My Farms</string>
+    <string name="nav_more">More</string>
+    <string name="camera_permission_required">Camera permission is required to scan crop leaves and stems for disease analysis.</string>
+</resources>
